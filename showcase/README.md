@@ -19,3 +19,9 @@ Open <http://127.0.0.1:8000/manifest/>. The build uses relative URLs so the same
 ## Deployment
 
 Pages uses the **GitHub Actions** source. Changes to this showcase or its workflow on `main` publish the allowlisted files in `showcase/dist/`. The workflow uses standard Ubuntu runners only when the repository is public. The video streams from YouTube. The original WebP is the same 1254 × 1254 public derivative used in the portfolio.
+
+## Workflow diagram
+
+The expanded-by-default “How manifest came together” section connects the film to its music, visual, editing, and delivery workflow. The map describes a manual, evolving process; optional tools, proposed export variants, and unfinished Aniflow steps are labeled.
+
+[manifest/workflow.svg](manifest/workflow.svg) is the static source and full-size view. [manifest/workflow-animated.svg](manifest/workflow-animated.svg) adds CSS data pulses to the existing solid connections. Keep the two maps in sync when editing their content. Both are self-contained SVGs with embedded brand shapes and no remote resources or scripts. The page provides a pause control and selects the static version for reduced-motion preferences. Both assets are explicitly included in the build’s publication allowlist.

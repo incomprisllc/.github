@@ -70,6 +70,8 @@ async function build() {
     "index.html": home,
     "manifest/index.html": renderFilm(template, id),
     "manifest/manifest.webp": artwork,
+    "manifest/workflow.svg": await readFile(new URL("workflow.svg", source)),
+    "manifest/workflow-animated.svg": await readFile(new URL("workflow-animated.svg", source)),
     "manifest/showcase.css": await readFile(new URL("showcase.css", source)),
   };
   if (id) files["manifest/player.js"] = await readFile(new URL("player.js", source));

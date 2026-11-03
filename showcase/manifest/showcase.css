@@ -726,3 +726,126 @@ svg { display: block; fill: none; stroke: currentColor; stroke-width: 1.6; strok
     transition: none;
   }
 }
+
+
+.architecture {
+  scroll-margin-top: 40px;
+  padding-bottom: 90px;
+}
+.architectureIntro {
+  max-width: 760px;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 30px;
+}
+.systemOverview {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  padding: 0;
+  margin: 0 0 34px;
+}
+.systemOverview li > span {
+  display: block;
+  color: var(--film-pink);
+  font-size: 12px;
+  margin-bottom: 9px;
+}
+.systemOverview p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.workflowMap {
+  border: 1px solid #d0b6f036;
+  border-radius: 14px;
+  background: #10101c;
+}
+.workflowMap > summary {
+  cursor: pointer;
+  padding: 20px 24px;
+  min-height: 64px;
+  font-size: 14px;
+  color: var(--film-ink);
+}
+.workflowMap > summary::marker {
+  color: var(--film-pink);
+}
+.mapHint {
+  display: inline-block;
+  margin-left: 16px;
+  font-size: 11px;
+  color: var(--film-muted);
+}
+.workflowMap[open] > summary {
+  border-bottom: 1px solid var(--film-line);
+}
+.mapBody {
+  padding: 18px 20px 20px;
+}
+.motionToggle {
+  accent-color: var(--film-pink);
+  width: 16px;
+  height: 16px;
+  margin: 0 7px 0 0;
+  vertical-align: middle;
+}
+.motionLabel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--film-copy);
+}
+.mapFullSize {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-left: 24px;
+  font-size: 12px;
+}
+.mapFigure {
+  margin: 12px 0 0;
+}
+.mapAnimated,
+.mapFigure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mapFigure img {
+  border-radius: 8px;
+}
+.mapFigure .mapStatic {
+  display: none;
+}
+.motionToggle:checked ~ .mapFigure .mapAnimated {
+  display: none;
+}
+.motionToggle:checked ~ .mapFigure .mapStatic {
+  display: block;
+}
+.mapFigure figcaption {
+  color: var(--film-muted);
+  font-size: 11px;
+  line-height: 1.8;
+  max-width: 860px;
+  padding-top: 18px;
+}
+@media (max-width: 640px) {
+  .architecture { padding-bottom: 50px; }
+  .architectureIntro { font-size: 13px; }
+  .systemOverview { grid-template-columns: 1fr; gap: 20px; }
+  .systemOverview li { max-width: 440px; }
+  .workflowMap > summary { padding: 18px 16px; }
+  .mapHint { display: block; margin: 7px 0 0 17px; }
+  .mapBody { padding: 10px; }
+  .mapFullSize { display: flex; margin-left: 0; }
+  .mapFigure figcaption { padding-inline: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motionToggle,
+  .motionLabel { display: none; }
+}
