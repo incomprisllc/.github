@@ -97,9 +97,37 @@
         </li>
       </ol>
     </section>
+    <section id="the-system" class="architecture" aria-labelledby="architecture-title">
+      <div class="sectionHeading">
+        <div><p class="eyebrow">03 / THE SYSTEM BEHIND THE FILM</p><h2 id="architecture-title">How manifest came together.</h2></div>
+        <p>Creative direction.<br>Engineering between the steps.</p>
+      </div>
+      <p class="architectureIntro">The film is one part of the work. Connecting the tools is another: shaping a song, building a visual world, and carrying both through editing and delivery. This is the workflow I’m developing through that process.</p>
+      <ol class="systemOverview">
+        <li><span>Sound</span><p>Lyrics and prompts become a song through Suno, my own production in Ableton, and mastering with Ozone 11.</p></li>
+        <li><span>World</span><p>Character references, first frames, and motion prompts guide scene generation in Gemini or Flow, followed by editing against the music.</p></li>
+        <li><span>Delivery</span><p>Timed captions and finishing lead toward clean and captioned exports, with a custom Aniflow pipeline still in development.</p></li>
+      </ol>
+      <details class="workflowMap" open>
+        <summary>Explore the connected workflow <span class="mapHint">Music · imagery · motion · delivery</span></summary>
+        <div class="mapBody">
+          <input class="motionToggle" id="pause-workflow" type="checkbox">
+          <label class="motionLabel" for="pause-workflow">Pause diagram motion</label>
+          <a class="mapFullSize" href="./workflow.svg">Open full-size diagram <span aria-hidden="true">↗</span></a>
+          <figure class="mapFigure">
+            <picture class="mapAnimated">
+              <source media="(prefers-reduced-motion: reduce)" srcset="./workflow.svg">
+              <img src="./workflow-animated.svg" width="1800" height="2580" loading="lazy" decoding="async" alt="Workflow map connecting lyrics and music production, visual development and animation, editing and captions, and a planned delivery pipeline.">
+            </picture>
+            <img class="mapStatic" src="./workflow.svg" width="1800" height="2580" loading="lazy" decoding="async" alt="Workflow map connecting lyrics and music production, visual development and animation, editing and captions, and a planned delivery pipeline.">
+            <figcaption>Working map · November 2026. This is a manual, evolving creative process. Optional tools, proposed caption variants, and the unfinished Aniflow delivery pipeline are labeled in the diagram.</figcaption>
+          </figure>
+        </div>
+      </details>
+    </section>
     <section class="why" aria-labelledby="why-title">
       <div class="whyMark" aria-hidden="true">✧</div>
-      <p class="eyebrow">03 / CREATIVE TOOLS</p>
+      <p class="eyebrow">04 / CREATIVE TOOLS</p>
       <h2 id="why-title">I make with these tools.<br><span>I want to help build them.</span></h2>
       <p class="whyCopy">I’m drawn to software that helps people take a creative impulse and turn it into something they can share. I experience that process as a creator, and I approach the tools behind it as a software engineer.</p>
       <div class="actions">
