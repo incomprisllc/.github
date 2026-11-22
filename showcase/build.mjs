@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const source = new URL("./manifest/", import.meta.url);
+const piecesSource = new URL("./pieces/", import.meta.url);
 const publishRoot = fileURLToPath(new URL("./dist/", import.meta.url));
 
 export function youtubeVideoId(value) {
@@ -30,10 +31,10 @@ const comingSoon = `<div class="screenMessage">
               <p>Until the screening opens, explore how the film came together below.</p>
             </div>`;
 
-export function renderFilm(template, id) {
+export function renderFilm(template, id, film = "manifest") {
   const watchUrl = `https://www.youtube.com/watch?v=${id}`;
   const screenControl = id
-    ? `<a class="playButton" href="${watchUrl}" data-embed-url="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" aria-label="Play manifest — final film">
+    ? `<a class="playButton" href="${watchUrl}" data-embed-url="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" data-film-title="${film} — final film" aria-label="Play ${film} — final film">
               <span aria-hidden="true">▶</span><strong>Play film</strong>
             </a>`
     : comingSoon;
@@ -51,6 +52,7 @@ const home = `<!doctype html>
   <meta name="robots" content="noindex,follow">
   <meta http-equiv="refresh" content="0; url=./manifest/">
   <title>manifest — Incompris</title>
+  <link rel="icon" href="./assets/incompris-favicon.ico" type="image/x-icon">
 </head>
 <body><p><a href="./manifest/">Open the manifest showcase</a></p></body>
 </html>
@@ -60,7 +62,10 @@ const home = `<!doctype html>
 async function build() {
   const config = JSON.parse(await readFile(new URL("config.json", source), "utf8"));
   const id = youtubeVideoId(config.youtubeVideoUrl);
+  const piecesConfig = JSON.parse(await readFile(new URL("config.json", piecesSource), "utf8"));
+  const piecesId = youtubeVideoId(piecesConfig.youtubeVideoUrl);
   const template = await readFile(new URL("index.html", source), "utf8");
+  const piecesTemplate = await readFile(new URL("index.html", piecesSource), "utf8");
   const artwork = await readFile(new URL("manifest.webp", source));
   const sha256 = (content) => createHash("sha256").update(content).digest("hex");
   if (sha256(artwork) !== "2b57385bd203bb99274b43c4255e204e4d30835d6d13b3b41fbfdf7de78954e4") {
@@ -68,13 +73,21 @@ async function build() {
   }
   const files = {
     "index.html": home,
+    "assets/incompris-favicon.ico": await readFile(new URL("./shared/incompris-favicon.ico", import.meta.url)),
     "manifest/index.html": renderFilm(template, id),
     "manifest/manifest.webp": artwork,
     "manifest/workflow.svg": await readFile(new URL("workflow.svg", source)),
     "manifest/workflow-animated.svg": await readFile(new URL("workflow-animated.svg", source)),
     "manifest/showcase.css": await readFile(new URL("showcase.css", source)),
+    "pieces/index.html": renderFilm(piecesTemplate, piecesId, "pieces"),
+    "pieces/pieces.webp": await readFile(new URL("pieces.webp", piecesSource)),
+    "pieces/pieces.css": await readFile(new URL("pieces.css", piecesSource)),
   };
-  if (id) files["manifest/player.js"] = await readFile(new URL("player.js", source));
+  if (id || piecesId) {
+    const player = await readFile(new URL("player.js", source));
+    if (id) files["manifest/player.js"] = player;
+    if (piecesId) files["pieces/player.js"] = player;
+  }
 
   await rm(publishRoot, { recursive: true, force: true });
   const inventory = [];

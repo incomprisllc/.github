@@ -1,0 +1,33 @@
+.pieces {
+  --film-ink: #f6f0ff;
+  --film-copy: #c9c3e3;
+  --film-muted: #aaa1cc;
+  --film-pink: #c7a7ff;
+  --film-line: #d0bcff26;
+  background: radial-gradient(ellipse 85% 36% at 72% 0, #822ab531, transparent), #101129;
+}
+
+.pieces a:hover { color: #97ebff; }
+.pieces :focus-visible { outline-color: #97ebff; }
+.pieces .skipLink { background: #25204c; }
+.pieces .signal { background: #ed89f9; box-shadow: 0 0 15px #ec62f499; }
+.pieces .heroAside span,
+.pieces .title span,
+.pieces .signatureDot { color: #f29cf4; }
+.pieces .screenFrame { background: #151631; box-shadow: 0 30px 100px #0006, 0 0 80px #7e41ee28; }
+.pieces .screenTop { background: #1a1a3e; color: #c9c3e3; }
+.pieces .screenTop i { background: #7de7ff; }
+.pieces .screen { background: #0b0b1d; }
+.pieces .posterShade { background: linear-gradient(0deg, #0b0827e8, #17103426 28%, transparent 75%); }
+.pieces .playButton > span { background: #140a34a6; }
+.pieces .playButton:hover > span { background: #472378da; }
+.pieces .workflow li,
+.pieces .systemOverview li { background-color: #171631; }
+.pieces .why { background: radial-gradient(ellipse at 100% 0%, #6220aa4d, transparent 70%), #171631; }
+.pieces .primaryLink { background: #d5bbff; border-color: #e6d8ff; color: #1b1241 !important; }
+.pieces .primaryLink:hover { background: #a8ebff; border-color: #c1f2ff; }
+.pieces .mapFigure { background: #14132e; }
+
+@media (max-width: 640px) {
+  .pieces .screen { aspect-ratio: 16 / 9; }
+}
