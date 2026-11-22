@@ -1,8 +1,8 @@
-# manifest
+# Incompris film showcases
 
-A small application showcase adapted from the [portfolio’s Descript page](https://github.com/szmyty/portfolio/tree/187ccf19f2dae817f1c0b2b440355379310915ab/src/features/descript). The Pages root forwards to `./manifest/`. The organization profile lives separately in `profile/README.md`.
+The [manifest](https://incomprisllc.github.io/.github/manifest/) showcase was adapted from the [portfolio’s Descript page](https://github.com/szmyty/portfolio/tree/187ccf19f2dae817f1c0b2b440355379310915ab/src/features/descript). [pieces](https://incomprisllc.github.io/.github/pieces/) uses the same layout and player with a violet, cyan, and pink palette drawn from its title screen. The Pages root forwards to `./manifest/`. The organization profile lives separately in `profile/README.md`.
 
-Set `youtubeVideoUrl` in [manifest/config.json](manifest/config.json) to an HTTPS YouTube watch or share URL. An empty string shows the artwork and **Video coming soon**. A configured URL enables the privacy-enhanced player on click and an ordinary **Watch on YouTube** link. Anyone who can read the public repository or page can follow the unlisted video link.
+Set `youtubeVideoUrl` in [manifest/config.json](manifest/config.json) or [pieces/config.json](pieces/config.json) to an HTTPS YouTube watch or share URL. An empty string shows the artwork and **Video coming soon**. A configured URL enables the privacy-enhanced player on click and an ordinary **Watch on YouTube** link. Anyone who can read the public repository or page can follow the unlisted video link.
 
 ## Local preview
 
@@ -14,11 +14,15 @@ node showcase/build.mjs
 python3 -m http.server 8000 --bind 127.0.0.1 --directory showcase/dist
 ```
 
-Open <http://127.0.0.1:8000/manifest/>. The build uses relative URLs so the same files work beneath the repository’s Pages prefix.
+Open <http://127.0.0.1:8000/manifest/> or <http://127.0.0.1:8000/pieces/>. The build uses relative URLs so the same files work beneath the repository’s Pages prefix.
 
 ## Deployment
 
-Pages uses the **GitHub Actions** source. Changes to this showcase or its workflow on `main` publish the allowlisted files in `showcase/dist/`. The workflow uses standard Ubuntu runners only when the repository is public. The video streams from YouTube. The original WebP is the same 1254 × 1254 public derivative used in the portfolio.
+Pages uses the **GitHub Actions** source. Changes to this showcase or its workflow on `main` publish the allowlisted files in `showcase/dist/`. The workflow uses standard Ubuntu runners only when the repository is public. The films stream from YouTube. The manifest WebP is the same 1254 × 1254 public derivative used in the portfolio. The pieces WebP is a still of the film’s opening title screen.
+
+## Incompris favicon
+
+Both showcases use [shared/incompris-favicon.ico](shared/incompris-favicon.ico), built from the transparent `incompris_logo.png` that matches the [Incompris organization avatar](https://github.com/incomprisllc). The brand master is in Drive Garden under `business/incompris/brand/assets/`, and the matching ICO is in `business/incompris/brand/assets/icons/`. Replace the shared production copy when updating both sites.
 
 ## Workflow diagram
 

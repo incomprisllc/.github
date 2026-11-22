@@ -43,10 +43,14 @@ test("the build publishes the workflow, static fallback, and only allowlisted as
   const dist = new URL("./dist/", import.meta.url);
   const config = JSON.parse(await readFile(new URL("./manifest/config.json", import.meta.url), "utf8"));
   const hasPlayer = Boolean(youtubeVideoId(config.youtubeVideoUrl));
+  const piecesConfig = JSON.parse(await readFile(new URL("./pieces/config.json", import.meta.url), "utf8"));
+  const piecesId = youtubeVideoId(piecesConfig.youtubeVideoUrl);
   const expected = [
-    "index.html", "manifest", "manifest/index.html", "manifest/manifest.webp",
+    "index.html", "assets", "assets/incompris-favicon.ico", "manifest", "manifest/index.html", "manifest/manifest.webp",
     "manifest/showcase.css", "manifest/workflow.svg", "manifest/workflow-animated.svg",
     ...(hasPlayer ? ["manifest/player.js"] : []),
+    "pieces", "pieces/index.html", "pieces/pieces.webp", "pieces/pieces.css",
+    ...(piecesId ? ["pieces/player.js"] : []),
   ];
   assert.deepEqual((await readdir(dist, { recursive: true })).sort(), expected.sort());
   const html = await readFile(new URL("manifest/index.html", dist), "utf8");
@@ -56,6 +60,17 @@ test("the build publishes the workflow, static fallback, and only allowlisted as
   assert.match(html, /prefers-reduced-motion: reduce/);
   assert.match(html, /id="pause-workflow"/);
   assert.match(html, /for="pause-workflow"/);
+  const pieces = await readFile(new URL("pieces/index.html", dist), "utf8");
+  for (const film of [html, pieces]) {
+    assert.match(film, /rel="icon" href="\.\.\/assets\/incompris-favicon\.ico"/);
+  }
+  assert.match(pieces, /src="\.\/pieces\.webp"/);
+  assert.match(pieces, /href="\.\.\/manifest\/showcase\.css"/);
+  assert.match(pieces, /src="\.\.\/manifest\/workflow-animated\.svg"/);
+  if (piecesId) {
+    assert.ok(pieces.includes(`https://www.youtube-nocookie.com/embed/${piecesId}?autoplay=1`));
+    assert.match(pieces, /data-film-title="pieces — final film"/);
+  }
   for (const name of ["workflow.svg", "workflow-animated.svg"]) {
     const source = await readFile(new URL("./manifest/" + name, import.meta.url), "utf8");
     assert.equal(await readFile(new URL("manifest/" + name, dist), "utf8"), source);

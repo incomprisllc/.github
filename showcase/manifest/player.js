@@ -5,7 +5,7 @@ playLink.addEventListener("click", (event) => {
 
   event.preventDefault();
   const player = document.createElement("iframe");
-  player.title = "manifest — final film";
+  player.title = playLink.dataset.filmTitle;
   player.className = "video";
   player.referrerPolicy = "strict-origin-when-cross-origin";
   player.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
